@@ -8,7 +8,7 @@ import { Filter } from './components/Filter';
 import { NewTodo } from './components/NewTodo';
 import { ToggleAllButton } from './components/ToggleAllButton';
 import { TodoList } from './components/TodoList';
-import { FILTERS, Status, TODO_MESSAGES } from './constants/todo';
+import { FILTERS, Status, TODOMessages } from './constants/todo';
 import {
   USER_ID,
   addTodo,
@@ -48,7 +48,7 @@ export const App: React.FC = () => {
 
     getTodos()
       .then(setTodos)
-      .catch(() => setErrorMessage(TODO_MESSAGES.unableToLoad));
+      .catch(() => setErrorMessage(TODOMessages.UnableToLoad));
 
     return undefined;
   }, []);
@@ -86,7 +86,7 @@ export const App: React.FC = () => {
     const trimmedTitle = title.trim();
 
     if (!trimmedTitle) {
-      setErrorMessage(TODO_MESSAGES.emptyTitle);
+      setErrorMessage(TODOMessages.EmptyTitle);
 
       return;
     }
@@ -104,7 +104,7 @@ export const App: React.FC = () => {
         setTodos(current => [...current, newTodo]);
         setTitle('');
       })
-      .catch(() => setErrorMessage(TODO_MESSAGES.unableToAdd))
+      .catch(() => setErrorMessage(TODOMessages.UnableToAdd))
       .finally(() => setTempTodo(null));
   };
 
@@ -116,7 +116,7 @@ export const App: React.FC = () => {
       await deleteTodo(todoId);
       setTodos(current => current.filter(todo => todo.id !== todoId));
     } catch {
-      setErrorMessage(TODO_MESSAGES.unableToDelete);
+      setErrorMessage(TODOMessages.UnableToDelete);
     } finally {
       setLoadingIds(current => current.filter(id => id !== todoId));
     }
@@ -135,7 +135,7 @@ export const App: React.FC = () => {
         ),
       );
     } catch {
-      setErrorMessage(TODO_MESSAGES.unableToUpdate);
+      setErrorMessage(TODOMessages.UnableToUpdate);
     } finally {
       setLoadingIds(current => current.filter(id => id !== todoId));
     }
@@ -154,7 +154,7 @@ export const App: React.FC = () => {
         ),
       );
     } catch (error) {
-      setErrorMessage(TODO_MESSAGES.unableToUpdate);
+      setErrorMessage(TODOMessages.UnableToUpdate);
       throw error;
     } finally {
       setLoadingIds(current => current.filter(id => id !== todoId));

@@ -9,37 +9,18 @@ interface FilterProps {
 
 export const Filter: React.FC<FilterProps> = ({ status, onStatusChange }) => (
   <nav className="filter" data-cy="Filter">
-    <a
-      href="#/"
-      className={classnames('filter__link', {
-        selected: status === FILTERS.all,
-      })}
-      data-cy="FilterLinkAll"
-      onClick={() => onStatusChange(FILTERS.all)}
-    >
-      All
-    </a>
-
-    <a
-      href="#/active"
-      className={classnames('filter__link', {
-        selected: status === FILTERS.active,
-      })}
-      data-cy="FilterLinkActive"
-      onClick={() => onStatusChange(FILTERS.active)}
-    >
-      Active
-    </a>
-
-    <a
-      href="#/completed"
-      className={classnames('filter__link', {
-        selected: status === FILTERS.completed,
-      })}
-      data-cy="FilterLinkCompleted"
-      onClick={() => onStatusChange(FILTERS.completed)}
-    >
-      Completed
-    </a>
+    {(Object.keys(FILTERS) as Status[]).map(filter => (
+      <a
+        key={filter}
+        href={`#/${filter}`}
+        className={classnames('filter__link', {
+          selected: status === filter,
+        })}
+        data-cy={`FilterLink${filter.charAt(0).toUpperCase()}${filter.slice(1)}`}
+        onClick={() => onStatusChange(filter)}
+      >
+        {filter.charAt(0).toUpperCase() + filter.slice(1)}
+      </a>
+    ))}
   </nav>
 );

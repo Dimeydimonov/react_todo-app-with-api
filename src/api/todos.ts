@@ -16,7 +16,7 @@ export const getUserId = (): number | undefined => {
   }
 };
 
-export const USER_ID: number = getUserId() ?? 0;
+export const USER_ID: number = getUserId() ?? 4548;
 
 const wait = (delay: number) =>
   new Promise(resolve => setTimeout(resolve, delay));

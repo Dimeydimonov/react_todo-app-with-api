@@ -6,10 +6,10 @@ export const FILTERS = {
 
 export type Status = (typeof FILTERS)[keyof typeof FILTERS];
 
-export const TODO_MESSAGES = {
-  emptyTitle: 'Title should not be empty',
-  unableToAdd: 'Unable to add a todo',
-  unableToDelete: 'Unable to delete a todo',
-  unableToLoad: 'Unable to load todos',
-  unableToUpdate: 'Unable to update a todo',
-} as const;
+export enum TODOMessages {
+  EmptyTitle = 'Title should not be empty',
+  UnableToAdd = 'Unable to add a todo',
+  UnableToDelete = 'Unable to delete a todo',
+  UnableToLoad = 'Unable to load todos',
+  UnableToUpdate = 'Unable to update a todo',
+}
