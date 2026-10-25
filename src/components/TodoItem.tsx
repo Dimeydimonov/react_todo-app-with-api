@@ -7,7 +7,7 @@ import { Todo } from '../types/Todo';
 interface TodoItemProps {
   todo: Todo;
   isLoading: boolean;
-  onDelete: (todoId: number) => Promise<void>;
+  onDelete: (todoId: number) => Promise<boolean>;
   onToggle: (todoId: number, completed: boolean) => Promise<void>;
   onRename: (todoId: number, title: string) => Promise<void>;
 }
@@ -48,8 +48,11 @@ export const TodoItem: React.FC<TodoItemProps> = ({
     }
 
     if (!trimmedTitle) {
-      await onDelete(todo.id);
-      setIsEditing(false);
+      const isDeleted = await onDelete(todo.id);
+
+      if (isDeleted) {
+        setIsEditing(false);
+      }
 
       return;
     }

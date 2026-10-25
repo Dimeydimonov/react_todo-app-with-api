@@ -6,7 +6,7 @@ interface TodoListProps {
   todos: Todo[];
   tempTodo: Todo | null;
   loadingIds: number[];
-  onDelete: (todoId: number) => Promise<void>;
+  onDelete: (todoId: number) => Promise<boolean>;
   onToggle: (todoId: number, completed: boolean) => Promise<void>;
   onRename: (todoId: number, title: string) => Promise<void>;
 }

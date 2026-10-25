@@ -108,15 +108,19 @@ export const App: React.FC = () => {
       .finally(() => setTempTodo(null));
   };
 
-  const handleDelete = async (todoId: number) => {
+  const handleDelete = async (todoId: number): Promise<boolean> => {
     setErrorMessage('');
     setLoadingIds(current => [...current, todoId]);
 
     try {
       await deleteTodo(todoId);
       setTodos(current => current.filter(todo => todo.id !== todoId));
+
+      return true;
     } catch {
       setErrorMessage(TODOMessages.UnableToDelete);
+
+      return false;
     } finally {
       setLoadingIds(current => current.filter(id => id !== todoId));
     }
